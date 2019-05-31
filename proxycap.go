@@ -2,6 +2,8 @@ package proxycap
 
 import "encoding/xml"
 
+// See documentation on http://www.proxycap.com/xml2prs-format.html
+
 // RuleSet element
 type RuleSet struct {
 	XMLName      xml.Name      `xml:"proxycap_ruleset"`
