@@ -9,7 +9,7 @@ type RuleSet struct {
 	XMLName      xml.Name      `xml:"proxycap_ruleset"`
 	Version      uint          `xml:"version,attr"`
 	ProxyServers []ProxyServer `xml:"proxy_servers>proxy_server"`
-	ProxyChains  []ProxyChain  `xml:"proxy_chains>proxy_chain"`
+	ProxyChains  []ProxyChain  `xml:"proxy_chains>proxy_chain,omitempty"`
 	RoutingRules []RoutingRule `xml:"routing_rules>routing_rule"`
 }
 
@@ -47,12 +47,12 @@ type RoutingRule struct {
 	RemoteDNS           bool            `xml:"remote_dns,attr"`
 	Disabled            bool            `xml:"disabled,attr"`
 	Transports          string          `xml:"transports,attr"`
-	ProxiesOrChains     []NamedRef      `xml:"proxy_or_chain"`
-	Programs            []Program       `xml:"programs>program"`
-	PortRanges          []PortRange     `xml:"ports>port_range"`
-	IPRanges            []IPRange       `xml:"ip_addresses>ip_range"`
-	HostNames           []HostNameRange `xml:"hostnames>hostname"`
-	RemoteDNSExceptions []HostNameRange `xml:"remote_dns_exceptions>remote_dns_exception"`
+	ProxiesOrChains     []NamedRef      `xml:"proxy_or_chain,omitempty"`
+	Programs            []Program       `xml:"programs>program,omitempty"`
+	PortRanges          []PortRange     `xml:"ports>port_range,omitempty"`
+	IPRanges            []IPRange       `xml:"ip_addresses>ip_range,omitempty"`
+	HostNames           []HostNameRange `xml:"hostnames>hostname,omitempty"`
+	RemoteDNSExceptions []HostNameRange `xml:"remote_dns_exceptions>remote_dns_exception,omitempty"`
 }
 
 // Program element
