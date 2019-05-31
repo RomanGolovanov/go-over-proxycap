@@ -42,17 +42,22 @@ type ProxyChain struct {
 
 // RoutingRule element
 type RoutingRule struct {
-	Name                string          `xml:"name,attr"`
-	Action              string          `xml:"action,attr"`
-	RemoteDNS           bool            `xml:"remote_dns,attr"`
-	Disabled            bool            `xml:"disabled,attr"`
-	Transports          string          `xml:"transports,attr"`
-	ProxiesOrChains     []NamedRef      `xml:"proxy_or_chain,omitempty"`
-	Programs            []Program       `xml:"programs>program,omitempty"`
-	PortRanges          []PortRange     `xml:"ports>port_range,omitempty"`
-	IPRanges            []IPRange       `xml:"ip_addresses>ip_range,omitempty"`
-	HostNames           []HostNameRange `xml:"hostnames>hostname,omitempty"`
-	RemoteDNSExceptions []HostNameRange `xml:"remote_dns_exceptions>remote_dns_exception,omitempty"`
+	Name                string                   `xml:"name,attr"`
+	Action              string                   `xml:"action,attr"`
+	RemoteDNS           bool                     `xml:"remote_dns,attr"`
+	Disabled            bool                     `xml:"disabled,attr"`
+	Transports          string                   `xml:"transports,attr"`
+	ProxiesOrChains     []NamedRef               `xml:"proxy_or_chain,omitempty"`
+	Programs            *ProgramColl             `xml:"programs,omitempty"`
+	PortRanges          *PortRangeColl           `xml:"ports,omitempty"`
+	IPRanges            *IPRangeColl             `xml:"ip_addresses,omitempty"`
+	HostNames           *HostNameRangeColl       `xml:"hostnames,omitempty"`
+	RemoteDNSExceptions *RemoteDNSExceptionsColl `xml:"remote_dns_exceptions,omitempty"`
+}
+
+// ProgramColl element
+type ProgramColl struct {
+	Programs []Program `xml:"program,omitempty"`
 }
 
 // Program element
@@ -61,10 +66,20 @@ type Program struct {
 	DirIncluded bool   `xml:"dir_included,attr"`
 }
 
+// IPRangeColl element
+type IPRangeColl struct {
+	IPRanges []IPRange `xml:"ip_range,omitempty"`
+}
+
 // IPRange element
 type IPRange struct {
 	IP   string `xml:"ip,attr"`
 	Mask uint   `xml:"mask,attr"`
+}
+
+// PortRangeColl element
+type PortRangeColl struct {
+	PortRanges []PortRange `xml:"port_range,omitempty"`
 }
 
 // PortRange element
@@ -73,8 +88,18 @@ type PortRange struct {
 	Last  uint `xml:"last,attr"`
 }
 
-// HostNameRange element
-type HostNameRange struct {
+// HostNameRangeColl element
+type HostNameRangeColl struct {
+	HostNameRanges []HostWildcard `xml:"hostname,omitempty"`
+}
+
+// RemoteDNSExceptionsColl element
+type RemoteDNSExceptionsColl struct {
+	RemoteDNSExceptions []HostWildcard `xml:"remote_dns_exception,omitempty"`
+}
+
+// HostWildcard element
+type HostWildcard struct {
 	Wildcard string `xml:"wildcard,attr"`
 }
 
