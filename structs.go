@@ -1,4 +1,4 @@
-package go-over-proxycap
+package proxycap
 
 import "encoding/xml"
 
